@@ -1,0 +1,69 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#line1{
+    padding: 10px;
+}
+#line2{
+    padding: 10px;
+}
+#line3{
+    padding: 10px;
+}
+#line4{
+    padding: 10px;
+}
+#line5{
+    padding: 10px;
+}
+#line6{
+    padding: 10px;
+}
+
+.input_box{
+    /* background-color: aqua; */
+    /* display: flex; */
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 3px 3px 3px lightgrey;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border: 0.5px lightgrey solid;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-align: center;
+}
+#line1{
+    padding:10px;
+}
+/*
+#line2{
+    padding: 3px;
+    width: 5px;
+    height: 5px;
+}
+#line3{
+    padding: 3px;
+    width: 5px;
+    height: 5px;
+}
+#line4{
+    padding: 3px;
+    width: 5px;
+    height: 5px;
+}
+#line5{
+    padding: 3px;
+    width: 5px;
+    height: 5px;
+}
+#line6{
+    padding: 3px;
+    width: 5px;
+    height: 5px;
+} */
