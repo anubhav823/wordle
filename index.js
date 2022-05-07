@@ -8,16 +8,12 @@ let line6 = document.getElementById('line6')
 const word = 'TREVOR';
 
 function moveOnMax(field, nextFieldID) {
-    console.log("field " + field);
-    // console.log("maxLength"+field.maxLength;
     if (field.value.length >= field.maxLength && nextFieldID.value.length === 0) {
-        console.log("This " + nextFieldID)
         nextFieldID.focus();
     }
 }
 
 function disable(id) {
-    console.log(id);
     document.getElementById(id).getElementsByClassName('input_box').disabled = true
 }
 
@@ -27,7 +23,7 @@ function enable() {
 
 function checkIfCharacterIsPresent(s) {
     for (let i = 0; i < word.length; i++) {
-        if (word[i] == s) {
+        if (word[i] === s.toUpperCase()) {
             return true;
         }
     }
@@ -36,7 +32,6 @@ function checkIfCharacterIsPresent(s) {
 
 function addEventListenerToLine(event) {
     let flag = 1;
-    console.log(event.currentTarget);
     let line = event.currentTarget;
     let array = [...line.childNodes];
     if (event.code !== 'Enter') {
@@ -51,11 +46,10 @@ function addEventListenerToLine(event) {
     if (event.code === 'Enter') {
         for (let i = 0; i < array.length; i++) {
             if (array[i].value.length != 1) {
-                console.log(array[i].value + " logs")
                 alert('found empty space line1')
                 break;
             }
-            if (array[i].value == word[i]) {
+            if (array[i].value.toUpperCase() === word[i]) {
                 array[i].style.backgroundColor = 'lightgreen'
             } else if (checkIfCharacterIsPresent(array[i].value)) {
                 array[i].style.backgroundColor = 'yellow'
