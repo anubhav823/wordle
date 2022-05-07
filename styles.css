@@ -23,15 +23,11 @@ body{
 }
 
 .input_box{
-    /* background-color: aqua; */
-    /* display: flex; */
     border-radius: 5px;
     padding: 5px;
     box-shadow: 3px 3px 3px lightgrey;
     width: 30px;
     height: 30px;
-    justify-content: center;
-    align-items: center;
     border: 0.5px lightgrey solid;
     font-size: 20px;
     margin-top: 10px;
