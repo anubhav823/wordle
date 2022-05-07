@@ -21,6 +21,14 @@ function enable() {
 
 }
 
+function checkIsEmpty(array) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].value === '' || array[i].value === " ") {
+            return true;
+        }
+    }
+    return false;
+}
 function checkIfCharacterIsPresent(s) {
     for (let i = 0; i < word.length; i++) {
         if (word[i] === s.toUpperCase()) {
@@ -29,41 +37,81 @@ function checkIfCharacterIsPresent(s) {
     }
     return false;
 }
+let score = 0;
+function scoreKeeper() {
+    document.getElementById('score').innerHTML = score
+}
 
-function addEventListenerToLine(event) {
+function enterOnEmptyRow(line, array) {
+    if (checkIsEmpty(array)) {
+        line.classList.add('bounce');
+        setTimeout(function () {
+            line.classList.remove('bounce');
+        }, 1000);
+    } else if (event.code === 'Enter') {
+        colorChangeOnEnter(array)
+    }
+}
+
+function colorChangeOnEnter(array) {
     let flag = 1;
-    let line = event.currentTarget;
-    let array = [...line.childNodes];
-    if (event.code !== 'Enter') {
-        for (let i = 0; i < array.length; i++) {
-            if (i !== array.length - 1) {
-                if (array[i].value.length >= array[i].maxLength && array[i + 1].value.length === 0) {
-                    array[i + 1].focus();
-                }
-            }
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].value.toUpperCase() === word[i]) {
+            array[i].style.backgroundColor = 'lightgreen'
+        } else if (checkIfCharacterIsPresent(array[i].value)) {
+            array[i].style.backgroundColor = 'yellow'
+            flag = 0;
+        } else {
+            array[i].style.backgroundColor = 'grey'
+            flag = 0;
         }
     }
+    if (flag == 1) {
+        alert('Done! You got the word')
+        score++;
+        scoreKeeper()
+    }
+}
+
+function addEventListenerToLine(event) {
+    let line = event.currentTarget;
+    let array = [...line.childNodes];
+    if (event.code !== 'Enter' && event.code !== 'Backspace') {
+        changeFocus(array)
+    }
+    if (event.code === 'Backspace') {
+        backspacePressed(event)
+    }
     if (event.code === 'Enter') {
-        for (let i = 0; i < array.length; i++) {
-            if (array[i].value.length != 1) {
-                alert('found empty space line1')
-                break;
+        enterOnEmptyRow(line, array)
+    }
+
+}
+function changeFocus(array) {
+    console.log('random key press');
+    for (let i = 0; i < array.length; i++) {
+        if (i !== array.length - 1) {
+            if (array[i].value.length >= array[i].maxLength && array[i + 1].value.length === 0 && array[i].value !== " ") {
+                array[i + 1].focus();
             }
-            if (array[i].value.toUpperCase() === word[i]) {
-                array[i].style.backgroundColor = 'lightgreen'
-            } else if (checkIfCharacterIsPresent(array[i].value)) {
-                array[i].style.backgroundColor = 'yellow'
-                flag = 0;
-            } else {
-                array[i].style.backgroundColor = 'red'
-                flag = 0;
-            }
-        }
-        if (flag == 1) {
-            alert('Done! You got the word')
         }
     }
 }
+
+function backspacePressed(event) {
+    console.log('backspace pressed');
+    if(event.target.value === ''){
+        if(event.target.previousSibling === null){
+            event.target.focus()
+        } else {
+            event.target.previousSibling.focus()
+        }
+    } else {
+        event.target.value = '';
+        event.target.focus()
+    }
+}
+
 line1.addEventListener("keyup", addEventListenerToLine);
 line2.addEventListener("keyup", addEventListenerToLine);
 line3.addEventListener("keyup", addEventListenerToLine);

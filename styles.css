@@ -2,24 +2,10 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: oldlace;
 }
-#line1{
-    padding: 10px;
-}
-#line2{
-    padding: 10px;
-}
-#line3{
-    padding: 10px;
-}
-#line4{
-    padding: 10px;
-}
-#line5{
-    padding: 10px;
-}
-#line6{
-    padding: 10px;
+.line{
+    padding:10px;
 }
 
 .input_box{
@@ -34,32 +20,44 @@ body{
     margin-left: 10px;
     text-align: center;
 }
-#line1{
-    padding:10px;
+.bounce {
+    outline: 0;
+    animation-name: bounce;
+    animation-duration: .5s;
 }
-/*
-#line2{
-    padding: 3px;
-    width: 5px;
-    height: 5px;
+/* This approximates the ease-in-out-bounce animation from easings.net, which would require a plug-in to use*/
+@keyframes bounce {
+  0% {
+    transform: translateX(0px);
+    timing-function: ease-in;
+  }
+  37% {
+    transform: translateX(5px);
+    timing-function: ease-out;
+  }
+  55% {
+    transform: translateX(-5px);
+    timing-function: ease-in;
+  }
+  73% {
+    transform: translateX(4px);
+    timing-function: ease-out;
+  }
+  82% {
+    transform: translateX(-4px);
+    timing-function: ease-in;
+  }
+  91% {
+    transform: translateX(2px);
+    timing-function: ease-out;
+  }
+  96% {
+    transform: translateX(-2px);
+    timing-function: ease-in;
+  }
+  100% {
+    transform: translateX(0px);
+    timing-function: ease-in;
+  }
 }
-#line3{
-    padding: 3px;
-    width: 5px;
-    height: 5px;
-}
-#line4{
-    padding: 3px;
-    width: 5px;
-    height: 5px;
-}
-#line5{
-    padding: 3px;
-    width: 5px;
-    height: 5px;
-}
-#line6{
-    padding: 3px;
-    width: 5px;
-    height: 5px;
-} */
+  
