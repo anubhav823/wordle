@@ -2,23 +2,33 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: oldlace;
+    background-color: #222222;
 }
 .line{
-    padding:10px;
+    padding:2.5px;
 }
-
+#title{
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
 .input_box{
-    border-radius: 5px;
+    outline: none;
+    border: 0.5px grey solid;
+    background-color: #222222;
     padding: 5px;
-    box-shadow: 3px 3px 3px lightgrey;
-    width: 30px;
-    height: 30px;
-    border: 0.5px lightgrey solid;
+    width: 40px;
+    height: 40px;
+    color:white;
     font-size: 20px;
     margin-top: 10px;
     margin-left: 10px;
     text-align: center;
+}
+.input_box :focus{
+    outline: none;
 }
 .bounce {
     outline: 0;

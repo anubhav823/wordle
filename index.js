@@ -5,7 +5,8 @@ let line4 = document.getElementById('line4')
 let line5 = document.getElementById('line5')
 let line6 = document.getElementById('line6')
 
-const word = 'TREVOR';
+const lines = [line1, line2, line3, line4, line5, line6]
+const word = 'CANDY';
 
 function moveOnMax(field, nextFieldID) {
     if (field.value.length >= field.maxLength && nextFieldID.value.length === 0) {
@@ -13,14 +14,13 @@ function moveOnMax(field, nextFieldID) {
     }
 }
 
-function disable(id) {
-    document.getElementById(id).getElementsByClassName('input_box').disabled = true
+function disablingAllLinesExceptCurrentLine(line) {
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i] !== line.id) {
+            lines[i].setAttribute('disabled', 'disabled')
+        }
+    }
 }
-
-function enable() {
-
-}
-
 function checkIsEmpty(array) {
     for (let i = 0; i < array.length; i++) {
         if (array[i].value === '' || array[i].value === " ") {
@@ -37,10 +37,6 @@ function checkIfCharacterIsPresent(s) {
     }
     return false;
 }
-let score = 0;
-function scoreKeeper() {
-    document.getElementById('score').innerHTML = score
-}
 
 function enterOnEmptyRow(line, array) {
     if (checkIsEmpty(array)) {
@@ -49,7 +45,7 @@ function enterOnEmptyRow(line, array) {
             line.classList.remove('bounce');
         }, 1000);
     } else if (event.code === 'Enter') {
-        colorChangeOnEnter(array)
+        return colorChangeOnEnter(array)
     }
 }
 
@@ -66,15 +62,21 @@ function colorChangeOnEnter(array) {
             flag = 0;
         }
     }
-    if (flag == 1) {
-        alert('Done! You got the word')
-        score++;
-        scoreKeeper()
+    if (flag === 1) {
+        disableAll()
+        disableInput()
+    }
+}
+
+function disableAll() {
+    for (let i = 0; i < lines.length; i++) {
+        lines[i].removeEventListener('keyup', addEventListenerToLine);
     }
 }
 
 function addEventListenerToLine(event) {
     let line = event.currentTarget;
+    let flag = 0;
     let array = [...line.childNodes];
     if (event.code !== 'Enter' && event.code !== 'Backspace') {
         changeFocus(array)
@@ -83,12 +85,10 @@ function addEventListenerToLine(event) {
         backspacePressed(event)
     }
     if (event.code === 'Enter') {
-        enterOnEmptyRow(line, array)
+        flag = enterOnEmptyRow(line, array)
     }
-
 }
 function changeFocus(array) {
-    console.log('random key press');
     for (let i = 0; i < array.length; i++) {
         if (i !== array.length - 1) {
             if (array[i].value.length >= array[i].maxLength && array[i + 1].value.length === 0 && array[i].value !== " ") {
@@ -99,9 +99,8 @@ function changeFocus(array) {
 }
 
 function backspacePressed(event) {
-    console.log('backspace pressed');
-    if(event.target.value === ''){
-        if(event.target.previousSibling === null){
+    if (event.target.value === '') {
+        if (event.target.previousSibling === null) {
             event.target.focus()
         } else {
             event.target.previousSibling.focus()
@@ -122,7 +121,7 @@ line6.addEventListener("keyup", addEventListenerToLine);
 
 
 function populateTextBoxes(line) {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
         let input = document.createElement('input');
         input.type = "text";
         input.maxLength = 1;
