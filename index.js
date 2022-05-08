@@ -78,13 +78,13 @@ function addEventListenerToLine(event) {
     let line = event.currentTarget;
     let flag = 0;
     let array = [...line.childNodes];
-    if (event.code !== 'Enter' && event.code !== 'Backspace') {
+    if (event.keyCode !== 13 && event.keyCode !== 8) {
         changeFocus(array)
     }
-    if (event.code === 'Backspace') {
+    if (event.keyCode === 8) {
         backspacePressed(event)
     }
-    if (event.code === 'Enter') {
+    if (event.keyCode === 13) {
         flag = enterOnEmptyRow(line, array)
     }
 }
